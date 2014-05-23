@@ -1,39 +1,40 @@
-require_relative '../names_and_bs'
+require 'json'
 
 class WordCloud
-  def sum_words
 
+  def list_people(input)
+    names_bs = JSON.parse(input)
+    names_bs.keys
+  end
+
+  def sum_words(input)
+    names_bs = JSON.parse(input)
     word_count = Hash.new(0)
-    NAMES_AND_BS.each_value do |val|
+
+    names_bs.each_value do |val|
       val.each do |str|
         str.split(" ").each do |word|
           word_count[word] += 1
         end
       end
-      word_count
     end
+    bs_word_sum = Hash.new { |hash, key| hash[key] = [] }
+    word_count.each do |word, count|
+      bs_word_sum[count] << word
+    end
+    bs_word_sum
+  end
 
-    h = {}
-    word_count.each_pair do |word, wcount|
-      if h[wcount].nil?
-        h[wcount] = [word]
-      else
-        h[wcount] << word
+  def words_names(input)
+    words_who = Hash.new { |hash, key| hash[key] = [] }
+    names_bs = JSON.parse(input)
+    names_bs.each do |name, bs|
+      bs.each do |str|
+        str.split(" ").each do |word|
+          words_who[word] << name unless words_who[word].include?(name)
+        end
       end
     end
-
-    h.each_key.sort.each do |key|
-      p "#{key} #{h[key].join(', ')}"
-    end
-
-  end
-
-  def list_people
-    NAMES_AND_BS.each do |key|
-      p key
-    end
+    words_who
   end
 end
-
-WordCloud.new.sum_words
-

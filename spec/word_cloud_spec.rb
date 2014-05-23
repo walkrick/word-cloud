@@ -1,14 +1,76 @@
 require 'rspec'
-require 'rspec/autorun'
-require_relative '../names_and_bs'
+require_relative '../lib/word_cloud'
 
+input = <<-JSON
+  {"Gaylord Mayert":
+    ["whiteboard","envisioneer plug-and-play"],
+  "Eusebio Mante":
+    ["syndicate schemas","whiteboard"]}
+JSON
 
-describe 'Popular words' do
+describe 'Word Cloud' do
   it 'lists people' do
 
-    expect(list_people).to eq <<-EOS
-      Charley Steuber
-      Oral Rath
-    EOS
+    list = WordCloud.new
+    expected = list.list_people(input)
+
+    expect(expected).to eq ["Gaylord Mayert", "Eusebio Mante"]
+  end
+
+  it 'sums multiple single use words from a single name' do
+    input = <<-JSON
+  {"Gaylord Mayert":
+    ["whiteboard stupendous confilgration"]}
+    JSON
+
+    sum_of_words = WordCloud.new
+    expected = sum_of_words.sum_words(input)
+    expect(expected).to eq({1=>["whiteboard", "stupendous", "confilgration"]})
+  end
+
+  it 'sums duplicate words from a single name' do
+    input = <<-JSON
+  {"Gaylord Mayert":
+    ["stupendous stupendous"]}
+    JSON
+    sum_of_words = WordCloud.new
+    expected = sum_of_words.sum_words(input)
+    expect(expected).to eq({2=>["stupendous"]})
+  end
+
+  it 'sums multiple multiple words from a single name' do
+    input = <<-JSON
+  {"Gaylord Mayert":
+    ["stupendous ingenious stupendous", "ingenious stupendous"]}
+    JSON
+    sum_of_words = WordCloud.new
+    expected = sum_of_words.sum_words(input)
+    expect(expected).to eq({2=>["ingenious"], 3=>["stupendous"]})
+  end
+
+  it 'lists the number of times a word is uttered (key)' do
+    input = <<-JSON
+  {"Gaylord Mayert":
+    ["whiteboard","envisioneer plug-and-play"],
+  "Eusebio Mante":
+    ["syndicate schemas","whiteboard"]}
+    JSON
+
+    list = WordCloud.new
+    expected = list.sum_words(input)
+
+    expect(expected).to eq({1=>["envisioneer", "plug-and-play", "syndicate", "schemas"], 2=>["whiteboard"]})
+  end
+
+  it 'lists each word and who says it' do
+    input = <<-JSON
+  {"Gaylord Mayert":
+    ["envisioneer"]}
+    JSON
+
+    list = WordCloud.new
+    expected = list.words_names(input)
+
+    expect(expected).to eq({"envisioneer"=>["Gaylord Mayert"]})
   end
 end
