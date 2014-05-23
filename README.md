@@ -1,13 +1,13 @@
 ## Project to create a word_cloud 'warmup'
 ### Goals
 1. Use the faker gem to create sample data to work on hashes and arrays.
-1. Learn how to read and write data into a JSON file.
-1. Write tests to create scenarios that a person has to figure out how to solve.
+1. Learn how to read and write a JSON file.
+1. Write tests to create different ways of presenting data.
 1. Get creative to help *me* learn and hopefully help others.
 
 ### To create the data/names_and_bs.json file of fake names and bs
 
-Edit fake_data_creator.rb to the number of names and saying you want.
+Edit bin/fake_data_creator.rb to the number of names and bs sayings you want.
  - line 7 is for names
  - line 10 is for the number of sayings
 
