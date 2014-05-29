@@ -16,13 +16,30 @@ Edit bin/fake_data_creator.rb to the number of names and bs sayings you want.
 
 ## Blah Blah!
 
-You really care about sounding like a pompous, ostentatious fool. You found a cool site that lists the cool people and the cool things they say.
+You really care about sounding like a pompous, ostentatious fool.
+You found a cool site that lists the cool people and the cool things they say.
 
-So, cool, all you have to do is make sure you are always saying the same cool things people will think you are, well, cool. Easy? Or not!
+So, cool, all you have to do is make sure you are always saying the same cool
+things people will think you are, well, cool. Easy? Or not!
 
-Holy bat-mobile Batman! The information is stored in a JSON file. If only you had paid more attention in week 7 of your 6 month, intensive, full-stack Ruby and Rails programming class held in beautiful downtown Boulder Colorado and knew your arrays from your hashes and knew who the heck this Jason guy was/is!
+Holy bat-mobile Batman! The information is stored in a JSON file. If only you had paid more attention
+ in week 7 of your 6 month, intensive, full-stack Ruby and Rails programming class held in beautiful
+ downtown Boulder Colorado and knew your arrays from your hashes and knew who the heck this Jason guy was/is!
 
-Oh well, better late than never. There is hope. Make the tests pass . . . perhaps you will find the enlightenment you desire.
+Oh well, better late than never. There is hope. Make the tests pass . . . perhaps you will find the
+enlightenment you desire.
+
+## Challenges
+
+* Who said what word
+
+Given this json file:
+
+Your code should produce a hash like...
+
+* Word count across everyone (case-insensitive)
+* Top words
+
 
 ### Instructions
 

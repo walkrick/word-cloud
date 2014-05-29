@@ -53,6 +53,7 @@ describe 'Word Cloud' do
     expect(returned_data).to eq({2 => ["ingenious"], 3 => ["stupendous"]})
   end
 
+  # {"envisioneer" => 2}
   it 'lists the number of times a word is uttered (key)' do
 
     input = <<-JSON
@@ -69,12 +70,15 @@ describe 'Word Cloud' do
   it 'lists each word and who says it' do
 
     input = <<-JSON
-      {"Gaylord Mayert":["envisioneer"]}
+      {
+        "Gaylord Mayert":["envisioneer"],
+        "Frank Fossil":["envisioneer"]
+      }
     JSON
 
     list = WordCloud.new
     returned_data = list.words_names(input)
 
-    expect(returned_data).to eq({"envisioneer" => ["Gaylord Mayert"]})
+    expect(returned_data).to eq({"envisioneer" => ["Gaylord Mayert", "Frank Fossil"]})
   end
 end
